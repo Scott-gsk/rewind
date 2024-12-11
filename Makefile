@@ -4,7 +4,7 @@ setup:
 	go install github.com/swaggo/swag/cmd/swag@latest
 
 docs:
-	cd examples/rewind_example && \
+	cd incubation/node-manager && \
 	swag init --parseDependency
 
 vendor:

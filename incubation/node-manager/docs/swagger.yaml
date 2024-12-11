@@ -1,0 +1,175 @@
+definitions:
+  entity.VariableCreateRequest:
+    properties:
+      cloud_region_id:
+        type: integer
+      description:
+        type: string
+      name:
+        type: string
+      value:
+        type: string
+    required:
+    - name
+    - value
+    type: object
+  entity.VariableItemResponse:
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      value:
+        type: string
+    type: object
+  entity.VariableUpdateRequest:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      value:
+        type: string
+    required:
+    - id
+    - name
+    - value
+    type: object
+info:
+  contact: {}
+paths:
+  /node-manager/internal/variable/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: entity
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/entity.VariableCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema: {}
+      summary: 创建变量
+      tags:
+      - Variable
+  /node-manager/internal/variable/delete/multiple:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Variable IDs
+        in: body
+        name: ids
+        required: true
+        schema:
+          items:
+            type: integer
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema: {}
+      summary: 删除多个变量
+      tags:
+      - Variable
+  /node-manager/internal/variable/delete/single/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Variable ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema: {}
+      summary: 删除单个变量
+      tags:
+      - Variable
+  /node-manager/internal/variable/list/{cloudRegionId}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Cloud Region ID
+        in: path
+        name: cloudRegionId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.VariableItemResponse'
+            type: array
+      summary: 获取该云区域下的所有变量
+      tags:
+      - Variable
+  /node-manager/internal/variable/search/{cloudRegionId}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Cloud Region ID
+        in: path
+        name: cloudRegionId
+        required: true
+        type: integer
+      - description: Search Value
+        in: query
+        name: value
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.VariableItemResponse'
+            type: array
+      summary: 搜索该云区域下的变量
+      tags:
+      - Variable
+  /node-manager/internal/variable/update:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: entity
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/entity.VariableUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema: {}
+      summary: 修改变量
+      tags:
+      - Variable
+swagger: "2.0"
