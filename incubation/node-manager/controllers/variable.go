@@ -71,7 +71,7 @@ func (ctrl VariableController) CreateVariable(c *fiber.Ctx) error {
 }
 
 // @Tags Variable
-// @Summary 修改变量
+// @Summary 更新变量
 // @Param req body entity.VariableUpdateRequest true "entity"
 // @Router /node-manager/internal/variable/update [put]
 // @Accept json

@@ -10,7 +10,3 @@ type Variable struct {
 	CloudRegionID uint        `json:"cloud_region_id"`
 	CloudRegion   CloudRegion `gorm:"foreignKey:CloudRegionID"`
 }
-
-func (v *Variable) TableName() string {
-	return "variables"
-}

@@ -5,6 +5,7 @@ import (
 	"github.com/urfave/cli/v2"
 	"node-manager/cmd/db"
 	"node-manager/cmd/server"
+	_ "node-manager/models"
 	"os"
 )
 

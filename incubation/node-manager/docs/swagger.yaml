@@ -1,4 +1,34 @@
 definitions:
+  entity.CloudRegionCreateRequest:
+    properties:
+      introduction:
+        type: string
+      name:
+        type: string
+    required:
+    - name
+    type: object
+  entity.CloudRegionItemResponse:
+    properties:
+      id:
+        type: integer
+      introduction:
+        type: string
+      name:
+        type: string
+    type: object
+  entity.CloudRegionUpdateRequest:
+    properties:
+      id:
+        type: integer
+      introduction:
+        type: string
+      name:
+        type: string
+    required:
+    - id
+    - name
+    type: object
   entity.VariableCreateRequest:
     properties:
       cloud_region_id:
@@ -42,6 +72,62 @@ definitions:
 info:
   contact: {}
 paths:
+  /node-manager/internal/cloud-region/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: entity
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/entity.CloudRegionCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema: {}
+      summary: 创建云区域
+      tags:
+      - CloudRegion
+  /node-manager/internal/cloud-region/list:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CloudRegionItemResponse'
+            type: array
+      summary: 获取所有云区域
+      tags:
+      - CloudRegion
+  /node-manager/internal/cloud-region/update:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: entity
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/entity.CloudRegionUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema: {}
+      summary: 更新云区域
+      tags:
+      - CloudRegion
   /node-manager/internal/variable/create:
     post:
       consumes:

@@ -4,6 +4,93 @@
         "contact": {}
     },
     "paths": {
+        "/node-manager/internal/cloud-region/create": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "CloudRegion"
+                ],
+                "summary": "创建云区域",
+                "parameters": [
+                    {
+                        "description": "entity",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.CloudRegionCreateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {}
+                    }
+                }
+            }
+        },
+        "/node-manager/internal/cloud-region/list": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "CloudRegion"
+                ],
+                "summary": "获取所有云区域",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/entity.CloudRegionItemResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/node-manager/internal/cloud-region/update": {
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "CloudRegion"
+                ],
+                "summary": "更新云区域",
+                "parameters": [
+                    {
+                        "description": "entity",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.CloudRegionUpdateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {}
+                    }
+                }
+            }
+        },
         "/node-manager/internal/variable/create": {
             "post": {
                 "consumes": [
@@ -206,6 +293,52 @@
         }
     },
     "definitions": {
+        "entity.CloudRegionCreateRequest": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "introduction": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.CloudRegionItemResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "introduction": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.CloudRegionUpdateRequest": {
+            "type": "object",
+            "required": [
+                "id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "introduction": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
         "entity.VariableCreateRequest": {
             "type": "object",
             "required": [

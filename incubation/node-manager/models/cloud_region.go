@@ -9,7 +9,3 @@ type CloudRegion struct {
 	Nodes        []Node     `gorm:"foreignKey:CloudRegionID"`
 	Variables    []Variable `gorm:"foreignKey:CloudRegionID"`
 }
-
-func (CloudRegion) TableName() string {
-	return "cloud_regions"
-}

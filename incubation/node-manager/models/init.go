@@ -16,9 +16,6 @@ func init() {
 		&Collector{},
 	)
 	database.RegisterModel(
-		&CollectorConfiguration{},
-	)
-	database.RegisterModel(
-		&NodeCollector{},
+		&Configuration{},
 	)
 }

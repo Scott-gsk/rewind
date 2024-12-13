@@ -4,14 +4,27 @@ import "gorm.io/gorm"
 
 type Node struct {
 	gorm.Model
-	Ip              string                   `json:"ip"`
-	OperatingSystem string                   `json:"operating_system"`
-	SidecarStatus   string                   `json:"sidecar_status"`
-	CloudRegionID   uint                     `json:"cloud_region_id"`
-	CloudRegion     CloudRegion              `gorm:"foreignKey:CloudRegionID"`
-	Configurations  []CollectorConfiguration `gorm:"many2many:node_collector_configurations;"`
+	OperatingSystem string          `json:"operating_system"`
+	IP              string          `json:"ip"`
+	StatusID        uint            `json:"status_id"`
+	Status          Status          `gorm:"foreignKey:StatusID"`
+	CloudRegionID   uint            `json:"cloud_region_id"`
+	CloudRegion     CloudRegion     `gorm:"foreignKey:CloudRegionID"`
+	Configurations  []Configuration `gorm:"many2many:configuration_nodes;"` // many to many
 }
 
-func (Node) TableName() string {
-	return "nodes"
+type Status struct {
+	gorm.Model
+	CollectorStatusList []CollectorStatus `json:"collectors" gorm:"foreignKey:StatusID"`
+	SidecarStatus       int               `json:"status"`
+}
+
+type CollectorStatus struct {
+	gorm.Model
+	StatusID        uint          `json:"status_id"`
+	CollectorID     uint          `json:"collector_id"`
+	Collector       Collector     `gorm:"foreignKey:CollectorID"`
+	ConfigurationID uint          `json:"configuration_id"`
+	Configuration   Configuration `gorm:"foreignKey:ConfigurationID"`
+	CollectorStatus int           `json:"collector_status"`
 }

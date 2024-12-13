@@ -16,6 +16,12 @@ func (e ExampleAppHooks) InstallInternalRouter(router fiber.Router) {
 	variableGroup.Delete("/delete/single/:id", variableController.DeleteSingleVariable)
 	variableGroup.Delete("/delete/multiple", variableController.DeleteMultipleVariables)
 
+	cloudRegionGroup := router.Group("/cloud-region")
+	cloudRegionController := controllers.CloudRegionController{}
+
+	cloudRegionGroup.Get("/list", cloudRegionController.List)
+	cloudRegionGroup.Post("/create", cloudRegionController.Create)
+	cloudRegionGroup.Put("/update", cloudRegionController.Update)
 }
 
 func (e ExampleAppHooks) InstallPublicRouter(router fiber.Router) {
