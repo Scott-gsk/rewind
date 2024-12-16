@@ -11,6 +11,7 @@ type CloudRegionController struct {
 	CloudRegionService services.CloudRegionService
 }
 
+// List
 // @Tags CloudRegion
 // @Summary 获取所有云区域
 // @Router /node-manager/internal/cloud-region/list [get]
@@ -25,6 +26,7 @@ func (ctrl CloudRegionController) List(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(cloudRegions)
 }
 
+// Create
 // @Tags CloudRegion
 // @Summary 创建云区域
 // @Param req body entity.CloudRegionCreateRequest true "entity"
@@ -44,6 +46,7 @@ func (ctrl CloudRegionController) Create(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON("Cloud region created successfully")
 }
 
+// Update
 // @Tags CloudRegion
 // @Summary 更新云区域
 // @Param req body entity.CloudRegionUpdateRequest true "entity"

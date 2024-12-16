@@ -47,3 +47,25 @@ func (ctrl CollectorController) List(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusOK).JSON(collectorItemResponses)
 }
+
+// Search
+// @Tags Collector
+// @Summary 根据名称或简介搜索采集器
+// @Accept json
+// @Produce json
+// @Param value path string true "value"
+// @Success 200 {object} []entity.CollectorItemResponse
+// @Router /node-manager/internal/collector/search/{value} [get]
+func (ctrl CollectorController) Search(c *fiber.Ctx) error {
+	value := c.Params("value")
+	if value == "" {
+		return fiber.NewError(fiber.StatusBadRequest, "Invalid search value")
+	}
+
+	collectorItemResponses, err := ctrl.CollectorService.Search(value)
+	if err != nil {
+		return fiber.NewError(fiber.StatusInternalServerError, "Failed to search collectors")
+	}
+
+	return c.Status(fiber.StatusOK).JSON(collectorItemResponses)
+}

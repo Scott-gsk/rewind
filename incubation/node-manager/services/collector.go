@@ -31,3 +31,15 @@ func (s CollectorService) List() ([]entity.CollectorItemResponse, error) {
 	}
 	return collectorItemResponses, nil
 }
+
+func (s CollectorService) Search(value string) ([]entity.CollectorItemResponse, error) {
+	var collectorItemResponses []entity.CollectorItemResponse
+	if err := global.DBClient.Client.
+		Model(&models.Collector{}).
+		Where("name LIKE ? OR introduction LIKE ?", "%"+value+"%", "%"+value+"%").
+		Select("id, name, introduction, operating_system, details").
+		Scan(&collectorItemResponses).Error; err != nil {
+		return nil, err
+	}
+	return collectorItemResponses, nil
+}
