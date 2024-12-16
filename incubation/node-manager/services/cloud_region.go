@@ -10,11 +10,11 @@ import (
 type CloudRegionService struct {
 }
 
-func (s CloudRegionService) List() (interface{}, interface{}) {
+func (s CloudRegionService) List() ([]entity.CloudRegionItemResponse, error) {
 	var cloudRegionResList []entity.CloudRegionItemResponse
 	err := global.DBClient.Client.
 		Model(&models.CloudRegion{}).
-		Select("ID as id, Name as name, Introduction as introduction").
+		Select("id, name, introduction").
 		Scan(&cloudRegionResList).Error
 	if err != nil {
 		return nil, err

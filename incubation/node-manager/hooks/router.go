@@ -22,6 +22,12 @@ func (e ExampleAppHooks) InstallInternalRouter(router fiber.Router) {
 	cloudRegionGroup.Get("/list", cloudRegionController.List)
 	cloudRegionGroup.Post("/create", cloudRegionController.Create)
 	cloudRegionGroup.Put("/update", cloudRegionController.Update)
+
+	collectorGroup := router.Group("/collector")
+	collectorController := controllers.CollectorController{}
+
+	collectorGroup.Get("/list", collectorController.List)
+	collectorGroup.Post("/create", collectorController.Create)
 }
 
 func (e ExampleAppHooks) InstallPublicRouter(router fiber.Router) {

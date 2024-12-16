@@ -102,6 +102,62 @@ const docTemplate = `{
                 }
             }
         },
+        "/node-manager/internal/collector/create": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Collector"
+                ],
+                "summary": "创建采集器",
+                "parameters": [
+                    {
+                        "description": "entity",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.CollectorCreateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {}
+                    }
+                }
+            }
+        },
+        "/node-manager/internal/collector/list": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Collector"
+                ],
+                "summary": "获取采集器列表",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/entity.CollectorItemResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/node-manager/internal/variable/create": {
             "post": {
                 "consumes": [
@@ -282,7 +338,7 @@ const docTemplate = `{
                 "tags": [
                     "Variable"
                 ],
-                "summary": "修改变量",
+                "summary": "更新变量",
                 "parameters": [
                     {
                         "description": "entity",
@@ -346,6 +402,49 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.CollectorCreateRequest": {
+            "type": "object",
+            "required": [
+                "description",
+                "details",
+                "name",
+                "operating_system"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "operating_system": {
+                    "type": "string"
+                }
+            }
+        },
+        "entity.CollectorItemResponse": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "operating_system": {
                     "type": "string"
                 }
             }

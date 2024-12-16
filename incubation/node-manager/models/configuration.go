@@ -4,11 +4,13 @@ import "gorm.io/gorm"
 
 type Configuration struct {
 	gorm.Model
-	Name            string    `json:"name"`
-	OperatingSystem string    `json:"operating_system"`
-	CollectorID     uint      `json:"collector_id"`
-	Collector       Collector `gorm:"foreignKey:CollectorID"`
-	Nodes           []Node    `gorm:"many2many:configuration_nodes;"`
+	Name            string      `json:"name"`
+	OperatingSystem string      `json:"operating_system"`
+	CollectorID     uint        `json:"collector_id"`
+	Collector       Collector   `gorm:"foreignKey:CollectorID"`
+	Nodes           []Node      `gorm:"many2many:configuration_nodes;"`
+	CloudRegionID   uint        `json:"cloud_region_id"`
+	CloudRegion     CloudRegion `gorm:"foreignKey:CloudRegionID"`
 }
 
 type ConfigurationNode struct {

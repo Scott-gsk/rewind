@@ -29,6 +29,35 @@ definitions:
     - id
     - name
     type: object
+  entity.CollectorCreateRequest:
+    properties:
+      description:
+        type: string
+      details:
+        type: string
+      name:
+        type: string
+      operating_system:
+        type: string
+    required:
+    - description
+    - details
+    - name
+    - operating_system
+    type: object
+  entity.CollectorItemResponse:
+    properties:
+      description:
+        type: string
+      details:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      operating_system:
+        type: string
+    type: object
   entity.VariableCreateRequest:
     properties:
       cloud_region_id:
@@ -128,6 +157,42 @@ paths:
       summary: 更新云区域
       tags:
       - CloudRegion
+  /node-manager/internal/collector/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: entity
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/entity.CollectorCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema: {}
+      summary: 创建采集器
+      tags:
+      - Collector
+  /node-manager/internal/collector/list:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.CollectorItemResponse'
+            type: array
+      summary: 获取采集器列表
+      tags:
+      - Collector
   /node-manager/internal/variable/create:
     post:
       consumes:
@@ -255,7 +320,7 @@ paths:
         "200":
           description: OK
           schema: {}
-      summary: 修改变量
+      summary: 更新变量
       tags:
       - Variable
 swagger: "2.0"

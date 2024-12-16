@@ -10,12 +10,21 @@ func init() {
 		&Variable{},
 	)
 	database.RegisterModel(
-		&Node{},
+		&Status{},
 	)
 	database.RegisterModel(
 		&Collector{},
 	)
 	database.RegisterModel(
 		&Configuration{},
+	)
+	database.RegisterModel(
+		&Node{},
+	)
+	database.RegisterModel(
+		&ConfigurationNode{},
+	)
+	database.RegisterModel(
+		&CollectorStatus{},
 	)
 }

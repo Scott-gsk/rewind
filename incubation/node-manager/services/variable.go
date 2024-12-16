@@ -14,7 +14,7 @@ func (service VariableService) ListByCloudRegion(cloudRegionId uint) ([]entity.V
 	var variableListRes []entity.VariableItemResponse
 	err := global.DBClient.Client.
 		Model(&models.Variable{}).
-		Select("ID as id, Name as name, Value as value, Description as description").
+		Select("id, name, value, description").
 		Where("cloud_region_id = ?", cloudRegionId).
 		Scan(&variableListRes).Error
 	if err != nil {
@@ -27,8 +27,8 @@ func (service VariableService) SearchByCloudRegion(cloudRegionId uint, value str
 	var variableListRes []entity.VariableItemResponse
 	err := global.DBClient.Client.
 		Model(&models.Variable{}).
-		Select("ID as id, Name as name, Value as value, Description as description").
-		Where("cloud_region_id = ? AND (Name LIKE ? OR Description LIKE ?)", cloudRegionId, "%"+value+"%", "%"+value+"%").
+		Select("id, name, value, description").
+		Where("cloud_region_id = ? AND (name LIKE ? OR description LIKE ?)", cloudRegionId, "%"+value+"%", "%"+value+"%").
 		Scan(&variableListRes).Error
 	if err != nil {
 		return nil, err
